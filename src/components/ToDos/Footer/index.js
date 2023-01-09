@@ -1,10 +1,12 @@
 import React from 'react'
 
-function Footer() {
+function Footer({todos}) {
+	const unCompleted = todos.filter((item) => item.completed === false);
+	const Completed = todos.filter((item) => item.completed === true);
   return (
     <div className='footer'>
       <span className="todo-count">
-			  <strong>2</strong>
+			  <strong>{unCompleted.length}</strong>
 			  items left
 		  </span>
 

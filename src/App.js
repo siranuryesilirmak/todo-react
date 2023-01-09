@@ -3,6 +3,7 @@ import './App.css';
 
 
 function App() {
+  //toDos companenti buraya bağlandı.
   return (
     <div className="App">
       <ToDos></ToDos>

@@ -1,36 +1,38 @@
 import React from 'react'
 
-function Main() {
+function Main({todos, setTodos}) {
   return (
-    <div className='main'>
+    <section className='main'>
       	<input className="toggle-all" type="checkbox" />
-        <label htmlFor="toggle-all">
-			     Mark all as complete
-		    </label>
+        <label htmlFor="toggle-all" onClick={() => {
+		}}>
+			 Mark all as complete
+		</label>
         <ul className="todo-list">
-			    <li className="completed">
-				    <div className="view">
-					    <input className="toggle" type="checkbox" />
-					    <label>Learn JavaScript</label>
-					    <button className="destroy"></button>
-				    </div>
-			    </li>
-			    <li>
-				    <div className="view">
-					    <input className="toggle" type="checkbox" />
-					    <label>Learn React</label>
-					    <button className="destroy"></button>
-				    </div>
-			    </li>
-			    <li>
-				    <div className="view">
-					    <input className="toggle" type="checkbox" />
-					    <label>Have a life!</label>
-					    <button className="destroy"></button>
-				    </div>
-			    </li>
-		    </ul>
-     </div>
+			{todos.map((todo, i) =>(
+			  <li key={i} className={todo.completed ? "completed" : ""}>
+				<div className="view">
+					<input 
+					  className="toggle" 
+					  type="checkbox" 
+					  checked={todo.completed}
+					  onChange={() => {setTodos(
+						todos.map((item) => {
+							return item === todo
+								? { ...item, completed: !item.completed }
+								: item;
+						})
+					)}} 
+					/>
+					<label>{todo.todoName}</label>
+					<button className="destroy" onClick={() => {
+                setTodos(todos.filter((item) => item !== todo))
+              }} ></button>
+				</div>
+			  </li>
+			))}
+		</ul>
+     </section>
   )
 }
 
